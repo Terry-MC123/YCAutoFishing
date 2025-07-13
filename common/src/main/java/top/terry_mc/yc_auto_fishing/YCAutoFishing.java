@@ -21,6 +21,7 @@ public final class YCAutoFishing {
         Minecraft minecraft = Minecraft.getInstance();
         if((component.getString().contains("右键") || component.getString().contains("剩余点击")) && minecraft.player != null && minecraft.level != null && minecraft.gameMode!=null && minecraft.player.getMainHandItem().getItem() == Items.FISHING_ROD) {
             minecraft.gameMode.useItem(minecraft.player, InteractionHand.MAIN_HAND);
+            if(component.getString().contains("剩余点击")) minecraft.player.swing(InteractionHand.MAIN_HAND);
         }
     }
 }
