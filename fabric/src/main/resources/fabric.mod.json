@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "yc_auto_fishing",
+  "version": "${version}",
+  "name": "YC Auto Fishing",
+  "description": "看名字就知道是干啥的mod了，简介懒得写",
+  "authors": [
+    "Terry_MC"
+  ],
+  "contact": {
+    "homepage": "https://terry-mc.top/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "top.terry_mc.yc_auto_fishing.fabric.YCAutoFishingFabric"
+    ]
+  },
+  "mixins": [
+    "yc_auto_fishing.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": ">=1.21",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
