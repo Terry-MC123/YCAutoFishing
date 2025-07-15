@@ -59,6 +59,8 @@ public class TextDisplayNavigator {
 
         for (Entity entity : mc.level.entitiesForRendering()) {
             if (entity instanceof TextDisplay display) {
+                if(!display.textRenderState().text().getString().contains("鱼群")) continue;
+
                 int lineCount = getTextLineCount(display);
 
                 if (lineCount > maxLines) {
