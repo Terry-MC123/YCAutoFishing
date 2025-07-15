@@ -30,6 +30,7 @@ public class TextDisplayNavigator {
         Minecraft mc = Minecraft.getInstance();
         BaritoneAPI.getSettings().allowBreak.value=false;
         BaritoneAPI.getSettings().allowSprint.value=true;
+        BaritoneAPI.getSettings().sprintInWater.value=true;
         IBaritone baritone = BaritoneAPI.getProvider().getPrimaryBaritone();
 
         if (mc.player == null || targetDisplay == null || !targetDisplay.isAlive()) {
