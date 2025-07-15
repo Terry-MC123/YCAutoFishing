@@ -31,6 +31,7 @@ public class TextDisplayNavigator {
         BaritoneAPI.getSettings().allowBreak.value=false;
         BaritoneAPI.getSettings().allowSprint.value=true;
         BaritoneAPI.getSettings().sprintInWater.value=true;
+        BaritoneAPI.getSettings().followRadius.value=2;
         IBaritone baritone = BaritoneAPI.getProvider().getPrimaryBaritone();
 
         if (mc.player == null || targetDisplay == null || !targetDisplay.isAlive()) {
@@ -68,7 +69,7 @@ public class TextDisplayNavigator {
 
         for (Entity entity : mc.level.entitiesForRendering()) {
             if (entity instanceof TextDisplay display) {
-                if(!display.textRenderState().text().getString().contains("鱼群")) continue;
+                if(!display.textRenderState().text().getString().contains("鱼群")||display.textRenderState().text().getString().contains("库存：空")||display.textRenderState().text().getString().contains("库存: 空")) continue;
 
                 int lineCount = getTextLineCount(display);
 
