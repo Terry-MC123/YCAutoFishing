@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -35,11 +36,15 @@ public class GuiMixin {
         if(!YCAutoFishing.isOnYCServer()) return;
         Window window = this.minecraft.getWindow();
         List<String> lines = new ArrayList<>();
+        int cnt = 0;
+        for (Entity entity : Minecraft.getInstance().level.entitiesForRendering()) {
+            cnt++;
+        }
         lines.add("YC Auto Fishing Overlay");
         lines.add("");
-        lines.add("Rendered fish schools: "+ TextDisplayNavigator.fishSchoolCount);
-        lines.add("");
+        lines.add("Rendered fish schools: "+cnt);
         if(TextDisplayNavigator.targetDisplay!=null) {
+            lines.add("");
             lines.add("Current target:");
             lines.add("");
             lines.addAll(List.of((TextDisplayNavigator.targetDisplay.textRenderState().text().getString().split("\n"))));
