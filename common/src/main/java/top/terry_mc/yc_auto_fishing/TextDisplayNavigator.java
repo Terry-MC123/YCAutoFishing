@@ -3,6 +3,7 @@ package top.terry_mc.yc_auto_fishing;
 import baritone.api.utils.input.Input;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Display.TextDisplay;
 import baritone.api.BaritoneAPI;
 import baritone.api.IBaritone;
@@ -38,15 +39,11 @@ public class TextDisplayNavigator {
         if (distance < STOP_DISTANCE) {
             baritone.getPathingBehavior().cancelEverything();
 
-            mc.player.setXRot(90.0F);
-            new Thread(()->{
-                baritone.getInputOverrideHandler().setInputForceState(Input.CLICK_RIGHT, true);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException ignored) {
-                }
-                baritone.getInputOverrideHandler().setInputForceState(Input.CLICK_RIGHT, false);
-            }).start();
+            mc.player.setXRot(65.0F);
+            if (mc.gameMode != null) {
+                mc.gameMode.useItem(mc.player, InteractionHand.MAIN_HAND);
+            }
+            mc.player.swing(InteractionHand.MAIN_HAND);
             cleanup();
         }
     }
