@@ -31,9 +31,8 @@ public final class YCAutoFishing {
     }
 
     public static void onChatMessage(Component component) {
-        if(isOnYCServer() && component.getString().contains("没有鱼")) {
+        if(isOnYCServer() && (component.getString().contains("没有鱼") || component.getString().contains("发生变动") || component.getString().contains("不在鱼群范围")) && Minecraft.getInstance().player.getMainHandItem().getItem() == Items.FISHING_ROD) {
             TextDisplayNavigator.navigateToLongestTextDisplay();
-            onTitle(Component.nullToEmpty("剩余点击"));//我表示不想写了，直接调用已经写好的得了（
         }
     }
 
