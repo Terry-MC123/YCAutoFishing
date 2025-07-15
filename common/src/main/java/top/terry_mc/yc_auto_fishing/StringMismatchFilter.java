@@ -1,203 +1,126 @@
 package top.terry_mc.yc_auto_fishing;
 
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.Logger;
-import org.apache.logging.log4j.core.filter.AbstractFilter;
 import org.apache.logging.log4j.message.Message;
 
-public class StringMismatchFilter extends AbstractFilter {
-    private final String text;
-
-    public StringMismatchFilter(final String text, final Result onMatch, final Result onMismatch) {
-        super(onMatch, onMismatch);
-        this.text = text;
+public class StringMismatchFilter implements Filter {
+    @Override
+    public Result getOnMismatch() {
+        return Result.NEUTRAL;
     }
 
     @Override
-    public Result filter(
-            final Logger logger, final Level level, final Marker marker, final String msg, final Object... params) {
-        return filter(logger.getMessageFactory().newMessage(msg, params).getFormattedMessage());
+    public Result getOnMatch() {
+        return Result.NEUTRAL;
+    }
+
+    public Result check(String s) {
+        if (s.contains("Received passengers for unknown entity"))
+            return Result.DENY;
+        return Result.NEUTRAL;
     }
 
     @Override
-    public Result filter(
-            final Logger logger, final Level level, final Marker marker, final Object msg, final Throwable t) {
-        return filter(logger.getMessageFactory().newMessage(msg).getFormattedMessage());
+    public Result filter(LogEvent event) {
+        return this.check(event.getMessage().getFormattedMessage());
     }
 
     @Override
-    public Result filter(
-            final Logger logger, final Level level, final Marker marker, final Message msg, final Throwable t) {
-        return filter(msg.getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object... arg4) {
+        return this.check(message);
     }
 
     @Override
-    public Result filter(final LogEvent event) {
-        return filter(event.getMessage().getFormattedMessage());
-    }
-
-    private Result filter(final String msg) {
-        return msg.contains(this.text) ? onMatch : onMismatch;
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4) {
+        return this.check(message);
     }
 
     @Override
-    public Result filter(
-            final Logger logger, final Level level, final Marker marker, final String msg, final Object p0) {
-        return filter(logger.getMessageFactory().newMessage(msg, p0).getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, Object message, Throwable arg4) {
+        return this.check(message.toString());
     }
 
     @Override
-    public Result filter(
-            final Logger logger,
-            final Level level,
-            final Marker marker,
-            final String msg,
-            final Object p0,
-            final Object p1) {
-        return filter(logger.getMessageFactory().newMessage(msg, p0, p1).getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, Message message, Throwable arg4) {
+        return this.check(message.getFormattedMessage());
     }
 
     @Override
-    public Result filter(
-            final Logger logger,
-            final Level level,
-            final Marker marker,
-            final String msg,
-            final Object p0,
-            final Object p1,
-            final Object p2) {
-        return filter(logger.getMessageFactory().newMessage(msg, p0, p1, p2).getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4, Object arg5) {
+        return this.check(message);
     }
 
     @Override
-    public Result filter(
-            final Logger logger,
-            final Level level,
-            final Marker marker,
-            final String msg,
-            final Object p0,
-            final Object p1,
-            final Object p2,
-            final Object p3) {
-        return filter(logger.getMessageFactory().newMessage(msg, p0, p1, p2, p3).getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4, Object arg5, Object arg6) {
+        return this.check(message);
     }
 
     @Override
-    public Result filter(
-            final Logger logger,
-            final Level level,
-            final Marker marker,
-            final String msg,
-            final Object p0,
-            final Object p1,
-            final Object p2,
-            final Object p3,
-            final Object p4) {
-        return filter(
-                logger.getMessageFactory().newMessage(msg, p0, p1, p2, p3, p4).getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4, Object arg5, Object arg6, Object arg7) {
+        return this.check(message);
     }
 
     @Override
-    public Result filter(
-            final Logger logger,
-            final Level level,
-            final Marker marker,
-            final String msg,
-            final Object p0,
-            final Object p1,
-            final Object p2,
-            final Object p3,
-            final Object p4,
-            final Object p5) {
-        return filter(logger.getMessageFactory()
-                .newMessage(msg, p0, p1, p2, p3, p4, p5)
-                .getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8) {
+        return this.check(message);
     }
 
     @Override
-    public Result filter(
-            final Logger logger,
-            final Level level,
-            final Marker marker,
-            final String msg,
-            final Object p0,
-            final Object p1,
-            final Object p2,
-            final Object p3,
-            final Object p4,
-            final Object p5,
-            final Object p6) {
-        return filter(logger.getMessageFactory()
-                .newMessage(msg, p0, p1, p2, p3, p4, p5, p6)
-                .getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9) {
+        return this.check(message);
     }
 
     @Override
-    public Result filter(
-            final Logger logger,
-            final Level level,
-            final Marker marker,
-            final String msg,
-            final Object p0,
-            final Object p1,
-            final Object p2,
-            final Object p3,
-            final Object p4,
-            final Object p5,
-            final Object p6,
-            final Object p7) {
-        return filter(logger.getMessageFactory()
-                .newMessage(msg, p0, p1, p2, p3, p4, p5, p6, p7)
-                .getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10) {
+        return this.check(message);
     }
 
     @Override
-    public Result filter(
-            final Logger logger,
-            final Level level,
-            final Marker marker,
-            final String msg,
-            final Object p0,
-            final Object p1,
-            final Object p2,
-            final Object p3,
-            final Object p4,
-            final Object p5,
-            final Object p6,
-            final Object p7,
-            final Object p8) {
-        return filter(logger.getMessageFactory()
-                .newMessage(msg, p0, p1, p2, p3, p4, p5, p6, p7, p8)
-                .getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10, Object arg11) {
+        return this.check(message);
     }
 
     @Override
-    public Result filter(
-            final Logger logger,
-            final Level level,
-            final Marker marker,
-            final String msg,
-            final Object p0,
-            final Object p1,
-            final Object p2,
-            final Object p3,
-            final Object p4,
-            final Object p5,
-            final Object p6,
-            final Object p7,
-            final Object p8,
-            final Object p9) {
-        return filter(logger.getMessageFactory()
-                .newMessage(msg, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9)
-                .getFormattedMessage());
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10, Object arg11, Object arg12) {
+        return this.check(message);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public Result filter(Logger arg0, Level arg1, Marker arg2, String message, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10, Object arg11, Object arg12, Object arg13) {
+        return this.check(message);
     }
 
+    @Override
+    public State getState() {
+        return State.STARTED;
+    }
+
+    @Override
+    public void initialize() {
+
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public boolean isStarted() {
+        return false;
+    }
+
+    @Override
+    public boolean isStopped() {
+        return false;
+    }
 }
