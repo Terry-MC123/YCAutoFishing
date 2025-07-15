@@ -40,7 +40,8 @@ public class GuiMixin {
         int cnt = 0;
         for (Entity entity : Minecraft.getInstance().level.entitiesForRendering()) {
             if (entity instanceof Display.TextDisplay display) {
-                if(!display.textRenderState().text().getString().contains("鱼群")) continue;
+                if (display.textRenderState() != null && !display.textRenderState().text().getString().contains("鱼群"))
+                    continue;
                 cnt++;
             }
         }
