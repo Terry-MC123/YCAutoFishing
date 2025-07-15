@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,7 +39,10 @@ public class GuiMixin {
         List<String> lines = new ArrayList<>();
         int cnt = 0;
         for (Entity entity : Minecraft.getInstance().level.entitiesForRendering()) {
-            cnt++;
+            if (entity instanceof Display.TextDisplay display) {
+                if(!display.textRenderState().text().getString().contains("鱼群")) continue;
+                cnt++;
+            }
         }
         lines.add("YC Auto Fishing Overlay");
         lines.add("");
