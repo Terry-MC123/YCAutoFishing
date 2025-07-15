@@ -40,7 +40,7 @@ public final class YCAutoFishing {
         if(isOnYCServer()) TextDisplayNavigator.tick();
     }
 
-    private static boolean isOnYCServer() {
+    public static boolean isOnYCServer() {
         ServerData serverData = Minecraft.getInstance().getCurrentServer();
         return serverData != null && serverData.ip.contains("ycraft.cn");
     }

@@ -1,5 +1,6 @@
 package top.terry_mc.yc_auto_fishing.mixin;
 
+import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -13,6 +14,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.terry_mc.yc_auto_fishing.TextDisplayNavigator;
 import top.terry_mc.yc_auto_fishing.YCAutoFishing;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(Gui.class)
 public class GuiMixin {
@@ -28,8 +32,18 @@ public class GuiMixin {
     }
     @Inject(method = "render", at = @At("TAIL"))
     public void renderMixin(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+        if(!YCAutoFishing.isOnYCServer()) return;
+        Window window = this.minecraft.getWindow();
+        List<String> lines = new ArrayList<>();
+        lines.add("YC Auto Fishing Overlay");
+        lines.add("");
+        lines.add("Rendered fish schools: "+ TextDisplayNavigator.fishSchoolCount);
         if(TextDisplayNavigator.targetDisplay!=null) {
-            guiGraphics.drawString(this.minecraft.font, "Target: " + TextDisplayNavigator.targetDisplay.textRenderState().text().getString(), 0, 300, 0xffffffff);
+            lines.add("Current target:");
+            lines.addAll(List.of((TextDisplayNavigator.targetDisplay.textRenderState().text().getString().split("\n"))));
+            for(int i=0;i<lines.size();i++) {
+                guiGraphics.drawString(this.minecraft.font, lines.get(i), 0, window.getGuiScaledHeight()/4 + 10 * (i+1), 0xffffffff);
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ public class TextDisplayNavigator {
     public static final double STOP_DISTANCE = 1.5;
     public static TextDisplay targetDisplay;
     public static IFollowProcess followProcess;
+    public static int fishSchoolCount = -1;
 
     public static void navigateToLongestTextDisplay() {
         Minecraft mc = Minecraft.getInstance();
@@ -62,6 +63,7 @@ public class TextDisplayNavigator {
         TextDisplay longestDisplay = null;
         int maxLines = 0;
 
+        int fishSchoolCnt = 0;
         for (Entity entity : mc.level.entitiesForRendering()) {
             if (entity instanceof TextDisplay display) {
                 if(!display.textRenderState().text().getString().contains("鱼群")) continue;
@@ -72,8 +74,11 @@ public class TextDisplayNavigator {
                     maxLines = lineCount;
                     longestDisplay = display;
                 }
+                fishSchoolCnt++;
             }
         }
+        fishSchoolCount=fishSchoolCnt;
+
         return longestDisplay;
     }
 
