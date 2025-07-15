@@ -8,7 +8,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.filter.StringMatchFilter;
+import org.apache.logging.log4j.core.Filter;
 
 public final class YCAutoFishing {
     public static final String MOD_ID = "yc_auto_fishing";
@@ -18,7 +18,7 @@ public final class YCAutoFishing {
         // Write common init code here.
         LOGGER.info("YC Auto Fishing loaded.");
         // Remove Repeating Log
-        ((org.apache.logging.log4j.core.Logger)LogManager.getRootLogger()).addFilter(new StringMatchFilter.Builder().setMatchString("Received passengers for unknown entity").build());
+        ((org.apache.logging.log4j.core.Logger)LogManager.getRootLogger()).addFilter(new StringMismatchFilter("Received passengers for unknown entity", Filter.Result.DENY, Filter.Result.NEUTRAL));
     }
 
     public static void onTitle(Component component) {
