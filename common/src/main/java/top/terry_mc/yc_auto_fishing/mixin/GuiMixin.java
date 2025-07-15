@@ -26,7 +26,7 @@ public class GuiMixin {
     public void setTitleMixin(Component component, CallbackInfo ci) {
         YCAutoFishing.onTitle(component);
     }
-    @Inject(method = "render", at = @At("HEAD"))
+    @Inject(method = "render", at = @At("TAIL"))
     public void renderMixin(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if(TextDisplayNavigator.targetDisplay!=null) {
             guiGraphics.drawString(this.minecraft.font, "Target: " + TextDisplayNavigator.targetDisplay.textRenderState().text().getString(), 0, 300, 0xffffffff);
