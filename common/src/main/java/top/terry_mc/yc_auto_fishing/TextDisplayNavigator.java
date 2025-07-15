@@ -9,7 +9,7 @@ import baritone.api.process.IFollowProcess;
 import net.minecraft.world.entity.Entity;
 
 public class TextDisplayNavigator {
-    public static final double STOP_DISTANCE = 0.5;
+    public static final double STOP_DISTANCE = 1.5;
     public static TextDisplay targetDisplay;
     public static IFollowProcess followProcess;
 
