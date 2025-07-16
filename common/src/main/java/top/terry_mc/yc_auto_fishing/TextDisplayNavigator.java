@@ -1,6 +1,5 @@
 package top.terry_mc.yc_auto_fishing;
 
-import baritone.api.utils.input.Input;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundSetCarriedItemPacket;
@@ -31,7 +30,7 @@ public class TextDisplayNavigator {
         BaritoneAPI.getSettings().allowBreak.value=false;
         BaritoneAPI.getSettings().allowSprint.value=true;
         BaritoneAPI.getSettings().sprintInWater.value=true;
-        BaritoneAPI.getSettings().followRadius.value=1;
+        BaritoneAPI.getSettings().followRadius.value=2;
         IBaritone baritone = BaritoneAPI.getProvider().getPrimaryBaritone();
 
         if (mc.player == null || targetDisplay == null || !targetDisplay.isAlive()) {
