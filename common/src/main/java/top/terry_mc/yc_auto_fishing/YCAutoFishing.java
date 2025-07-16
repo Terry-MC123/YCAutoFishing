@@ -21,19 +21,13 @@ public final class YCAutoFishing {
     }
 
     public static void onTitle(Component component) {
-        new Thread(()-> {
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException ignored) {
-            }
-            Minecraft minecraft = Minecraft.getInstance();
-            InteractionResult result;
-            if (isOnYCServer() && (component.getString().contains("右键") || component.getString().contains("剩余点击")) && minecraft.player != null && minecraft.level != null && minecraft.gameMode != null && minecraft.player.getMainHandItem().getItem() == Items.FISHING_ROD) {
-                result = minecraft.gameMode.useItem(minecraft.player, InteractionHand.MAIN_HAND);
-                if (result.shouldSwing() && component.getString().contains("剩余点击"))
-                    minecraft.player.swing(InteractionHand.MAIN_HAND);
-            }
-        }).start();
+        Minecraft minecraft = Minecraft.getInstance();
+        InteractionResult result;
+        if (isOnYCServer() && (component.getString().contains("右键") || component.getString().contains("剩余点击")) && minecraft.player != null && minecraft.level != null && minecraft.gameMode != null && minecraft.player.getMainHandItem().getItem() == Items.FISHING_ROD) {
+            result = minecraft.gameMode.useItem(minecraft.player, InteractionHand.MAIN_HAND);
+            if (result.shouldSwing() && component.getString().contains("剩余点击"))
+                minecraft.player.swing(InteractionHand.MAIN_HAND);
+        }
     }
 
     public static void onChatMessage(Component component) {
