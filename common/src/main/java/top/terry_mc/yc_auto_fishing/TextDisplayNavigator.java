@@ -9,11 +9,14 @@ import baritone.api.BaritoneAPI;
 import baritone.api.IBaritone;
 import baritone.api.process.IFollowProcess;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public class TextDisplayNavigator {
     public static final double STOP_DISTANCE = 2;
     public static TextDisplay targetDisplay;
     public static IFollowProcess followProcess;
+    private static Vec3 lastPosition = null;
+    private static int stuckTickCount = 0;
 
     public static void navigateToLongestTextDisplay() {
         IBaritone baritone = BaritoneAPI.getProvider().getPrimaryBaritone();
@@ -38,7 +41,22 @@ public class TextDisplayNavigator {
             return;
         }
 
-        double distance = mc.player.position().distanceTo(targetDisplay.position());
+        Vec3 nowPosition = mc.player.position();
+        if(lastPosition!=null && nowPosition.distanceTo(lastPosition) <= 0.01) {
+            stuckTickCount++;
+        }
+        else {
+            stuckTickCount = 0;
+        }
+        lastPosition = nowPosition;
+        if(stuckTickCount>200) {
+            navigateToLongestTextDisplay();
+            stuckTickCount=0;
+            lastPosition = null;
+            return;
+        }
+
+        double distance = nowPosition.distanceTo(targetDisplay.position());
         if (distance < STOP_DISTANCE) {
             baritone.getPathingBehavior().cancelEverything();
             mc.player.getInventory().selected = 5;
@@ -68,7 +86,8 @@ public class TextDisplayNavigator {
 
         for (Entity entity : mc.level.entitiesForRendering()) {
             if (entity instanceof TextDisplay display) {
-                if(!display.textRenderState().text().getString().contains("鱼群")||display.textRenderState().text().getString().contains("库存：空")||display.textRenderState().text().getString().contains("库存: 空")||display.textRenderState().text().getString().contains("库存：少")||display.textRenderState().text().getString().contains("库存: 少")) continue;
+                if (display.textRenderState() == null || !display.textRenderState().text().getString().contains("鱼群") || display.textRenderState().text().getString().contains("库存：空") || display.textRenderState().text().getString().contains("库存: 空") || display.textRenderState().text().getString().contains("库存：少") || display.textRenderState().text().getString().contains("库存: 少"))
+                    continue;
 
                 int lineCount = getTextLineCount(display);
 
