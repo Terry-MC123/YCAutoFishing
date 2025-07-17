@@ -38,6 +38,9 @@ public final class YCAutoFishingFabric implements ModInitializer {
                 if(YCAutoFishing.autoFishingEnabled) {
                     TextDisplayNavigator.navigateToLongestTextDisplay();
                 }
+                else {
+                    TextDisplayNavigator.followProcess.cancel();
+                }
             }
         }));
         ClientReceiveMessageEvents.GAME.register((component, overlay) -> {
