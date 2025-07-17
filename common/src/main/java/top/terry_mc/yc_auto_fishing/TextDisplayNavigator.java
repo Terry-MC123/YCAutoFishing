@@ -1,15 +1,22 @@
 package top.terry_mc.yc_auto_fishing;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundSetCarriedItemPacket;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Display.TextDisplay;
 import baritone.api.BaritoneAPI;
 import baritone.api.IBaritone;
 import baritone.api.process.IFollowProcess;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class TextDisplayNavigator {
     public static final double STOP_DISTANCE = 2;
@@ -33,6 +40,12 @@ public class TextDisplayNavigator {
         BaritoneAPI.getSettings().allowBreak.value=false;
         BaritoneAPI.getSettings().allowSprint.value=true;
         BaritoneAPI.getSettings().sprintInWater.value=true;
+        BaritoneAPI.getSettings().avoidance.value=true;
+        BuiltInRegistries.BLOCK.getTag(BlockTags.FENCE_GATES).ifPresent(tag -> {
+            for(Holder<Block> block:tag) {
+                BaritoneAPI.getSettings().blocksToAvoid.value.add(block.value());
+            }
+        });
         BaritoneAPI.getSettings().followRadius.value=2;
         IBaritone baritone = BaritoneAPI.getProvider().getPrimaryBaritone();
 

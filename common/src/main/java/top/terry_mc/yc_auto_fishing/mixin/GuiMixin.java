@@ -54,6 +54,13 @@ public class GuiMixin {
             lines.add("");
             lines.addAll(List.of((TextDisplayNavigator.targetDisplay.textRenderState().text().getString().split("\n"))));
         }
+        if(YCAutoFishing.autoFishingEnabled) {
+            lines.add("");
+            lines.add("Auto Fishing Enabled");
+        } else {
+            lines.add("");
+            lines.add("Auto Fishing Disabled (Press Y for default to toggle)");
+        }
         for(int i=0;i<lines.size();i++) {
             guiGraphics.drawString(this.minecraft.font, lines.get(i), 0, window.getGuiScaledHeight()/4 + 10 * (i+1), 0xffffffff);
         }
