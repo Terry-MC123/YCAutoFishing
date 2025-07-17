@@ -48,7 +48,7 @@ public final class YCAutoFishing {
             TextDisplayNavigator.tick();
             if(autoFishingEnabled) {
                 stuckTickCount++;
-                if (stuckTickCount > 200 && TextDisplayNavigator.followProcess!=null && TextDisplayNavigator.followProcess.following().isEmpty()) {
+                if (stuckTickCount > 200 && (TextDisplayNavigator.followProcess==null || TextDisplayNavigator.followProcess.following().isEmpty())) {
                     Minecraft minecraft = Minecraft.getInstance();
                     minecraft.player.getInventory().selected = 5;
                     minecraft.getConnection().send(new ServerboundSetCarriedItemPacket(5));
