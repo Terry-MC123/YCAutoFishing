@@ -39,7 +39,7 @@ public final class YCAutoFishingNeoForge {
             if(YCAutoFishing.autoFishingEnabled) {
                 TextDisplayNavigator.navigateToLongestTextDisplay();
             }
-            else {
+            else if (TextDisplayNavigator.followProcess!=null) {
                 TextDisplayNavigator.followProcess.cancel();
             }
         }

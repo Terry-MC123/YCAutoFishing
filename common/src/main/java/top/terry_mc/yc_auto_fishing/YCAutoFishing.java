@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.w3c.dom.Text;
 
 public final class YCAutoFishing {
     public static final String MOD_ID = "yc_auto_fishing";
@@ -47,7 +48,7 @@ public final class YCAutoFishing {
             TextDisplayNavigator.tick();
             if(autoFishingEnabled) {
                 stuckTickCount++;
-                if (stuckTickCount > 200) {
+                if (stuckTickCount > 200 && TextDisplayNavigator.followProcess!=null && !TextDisplayNavigator.followProcess.following().isEmpty()) {
                     Minecraft minecraft = Minecraft.getInstance();
                     minecraft.player.getInventory().selected = 5;
                     minecraft.getConnection().send(new ServerboundSetCarriedItemPacket(5));

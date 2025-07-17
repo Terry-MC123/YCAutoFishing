@@ -13,10 +13,7 @@ import baritone.api.IBaritone;
 import baritone.api.process.IFollowProcess;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.List;
 
 public class TextDisplayNavigator {
     public static final double STOP_DISTANCE = 2;

@@ -38,7 +38,7 @@ public final class YCAutoFishingFabric implements ModInitializer {
                 if(YCAutoFishing.autoFishingEnabled) {
                     TextDisplayNavigator.navigateToLongestTextDisplay();
                 }
-                else {
+                else if (TextDisplayNavigator.followProcess!=null) {
                     TextDisplayNavigator.followProcess.cancel();
                 }
             }
