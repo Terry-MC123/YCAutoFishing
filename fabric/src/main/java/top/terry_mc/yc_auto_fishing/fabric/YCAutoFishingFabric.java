@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.minecraft.client.KeyMapping;
 import org.lwjgl.glfw.GLFW;
+import top.terry_mc.yc_auto_fishing.TextDisplayNavigator;
 import top.terry_mc.yc_auto_fishing.YCAutoFishing;
 
 public final class YCAutoFishingFabric implements ModInitializer {
@@ -34,6 +35,9 @@ public final class YCAutoFishingFabric implements ModInitializer {
             else if(isToggleAutoFishingDown) {
                 isToggleAutoFishingDown = false;
                 YCAutoFishing.autoFishingEnabled = !YCAutoFishing.autoFishingEnabled;
+                if(YCAutoFishing.autoFishingEnabled) {
+                    TextDisplayNavigator.navigateToLongestTextDisplay();
+                }
             }
         }));
         ClientReceiveMessageEvents.GAME.register((component, overlay) -> {

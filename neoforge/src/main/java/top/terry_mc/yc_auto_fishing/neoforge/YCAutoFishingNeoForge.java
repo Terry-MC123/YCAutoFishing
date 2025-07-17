@@ -10,6 +10,7 @@ import net.neoforged.neoforge.client.event.ClientChatReceivedEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import org.lwjgl.glfw.GLFW;
+import top.terry_mc.yc_auto_fishing.TextDisplayNavigator;
 import top.terry_mc.yc_auto_fishing.YCAutoFishing;
 
 @EventBusSubscriber
@@ -35,6 +36,9 @@ public final class YCAutoFishingNeoForge {
         else if(isToggleAutoFishingDown) {
             isToggleAutoFishingDown = false;
             YCAutoFishing.autoFishingEnabled = !YCAutoFishing.autoFishingEnabled;
+            if(YCAutoFishing.autoFishingEnabled) {
+                TextDisplayNavigator.navigateToLongestTextDisplay();
+            }
         }
     }
     @SubscribeEvent
