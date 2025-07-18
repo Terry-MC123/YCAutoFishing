@@ -15,7 +15,7 @@ public final class YCAutoFishing {
     public static final String MOD_ID = "yc_auto_fishing";
     public static final Logger LOGGER = LogManager.getLogger("YC Auto Fishing");
     public static boolean autoFishingEnabled = false;
-    private static int stuckTickCount = 0;
+    public static int stuckTickCount = 0;
 
     public static void init() {
         // Write common init code here.
@@ -47,7 +47,12 @@ public final class YCAutoFishing {
         if(isOnYCServer()) {
             TextDisplayNavigator.tick();
             if(autoFishingEnabled) {
-                stuckTickCount++;
+                if(TextDisplayNavigator.followProcess==null || TextDisplayNavigator.followProcess.following().isEmpty()) {
+                    stuckTickCount++;
+                }
+                else {
+                    stuckTickCount = 0;
+                }
                 if (stuckTickCount > 200 && (TextDisplayNavigator.followProcess==null || TextDisplayNavigator.followProcess.following().isEmpty())) {
                     Minecraft minecraft = Minecraft.getInstance();
                     minecraft.player.getInventory().selected = 5;
@@ -57,9 +62,9 @@ public final class YCAutoFishing {
                         if (result.shouldSwing()) {
                             minecraft.player.swing(InteractionHand.MAIN_HAND);
                         }
-                        stuckTickCount = 0;
                     }
                 }
+                if(stuckTickCount>200) stuckTickCount = 0;
             }
         }
     }

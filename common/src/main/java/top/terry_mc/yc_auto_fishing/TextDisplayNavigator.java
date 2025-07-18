@@ -20,7 +20,7 @@ public class TextDisplayNavigator {
     public static TextDisplay targetDisplay;
     public static IFollowProcess followProcess;
     private static Vec3 lastPosition = null;
-    private static int stuckTickCount = 0;
+    public static int stuckTickCount = 0;
 
     public static void navigateToLongestTextDisplay() {
         IBaritone baritone = BaritoneAPI.getProvider().getPrimaryBaritone();

@@ -61,8 +61,9 @@ public class GuiMixin {
             lines.add("");
             lines.add("Auto Fishing Disabled (Press Y for default to toggle)");
         }
+        lines.add("TSTC: " + YCAutoFishing.stuckTickCount + " PSTC: "+ TextDisplayNavigator.stuckTickCount);
         for(int i=0;i<lines.size();i++) {
-            guiGraphics.drawString(this.minecraft.font, lines.get(i), 0, window.getGuiScaledHeight()/4 + 10 * (i+1), 0xffffffff);
+            guiGraphics.drawString(this.minecraft.font, lines.get(i), 0, window.getGuiScaledHeight()/4 + 10 * i, 0xffffffff);
         }
     }
 }
