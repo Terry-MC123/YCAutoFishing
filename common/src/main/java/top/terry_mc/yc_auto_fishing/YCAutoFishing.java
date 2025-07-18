@@ -24,16 +24,6 @@ public final class YCAutoFishing {
 
     public static void init() {
         // Write common init code here.
-        BaritoneAPI.getSettings().allowBreak.value=false;
-        BaritoneAPI.getSettings().allowSprint.value=true;
-        BaritoneAPI.getSettings().sprintInWater.value=true;
-        BaritoneAPI.getSettings().avoidance.value=true;
-        BuiltInRegistries.BLOCK.getTag(BlockTags.FENCE_GATES).ifPresent(tag -> {
-            for(Holder<Block> block:tag) {
-                BaritoneAPI.getSettings().blocksToAvoid.value.add(block.value());
-            }
-        });
-        BaritoneAPI.getSettings().followRadius.value=2;
         // Remove Repeating Log
         ((org.apache.logging.log4j.core.Logger)LogManager.getRootLogger()).addFilter(new StringMismatchFilter());
         LOGGER.info("YC Auto Fishing loaded.");
