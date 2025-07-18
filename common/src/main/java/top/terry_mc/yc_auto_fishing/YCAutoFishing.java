@@ -1,12 +1,17 @@
 package top.terry_mc.yc_auto_fishing;
 
+import baritone.api.BaritoneAPI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundSetCarriedItemPacket;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Text;
@@ -19,9 +24,19 @@ public final class YCAutoFishing {
 
     public static void init() {
         // Write common init code here.
-        LOGGER.info("YC Auto Fishing loaded.");
+        BaritoneAPI.getSettings().allowBreak.value=false;
+        BaritoneAPI.getSettings().allowSprint.value=true;
+        BaritoneAPI.getSettings().sprintInWater.value=true;
+        BaritoneAPI.getSettings().avoidance.value=true;
+        BuiltInRegistries.BLOCK.getTag(BlockTags.FENCE_GATES).ifPresent(tag -> {
+            for(Holder<Block> block:tag) {
+                BaritoneAPI.getSettings().blocksToAvoid.value.add(block.value());
+            }
+        });
+        BaritoneAPI.getSettings().followRadius.value=2;
         // Remove Repeating Log
         ((org.apache.logging.log4j.core.Logger)LogManager.getRootLogger()).addFilter(new StringMismatchFilter());
+        LOGGER.info("YC Auto Fishing loaded.");
     }
 
     public static void onTitle(Component component) {
