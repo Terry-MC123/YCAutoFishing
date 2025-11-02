@@ -28,6 +28,7 @@ public class TextDisplayNavigator {
         BaritoneAPI.getSettings().allowSprint.value=true;
         BaritoneAPI.getSettings().sprintInWater.value=true;
         BaritoneAPI.getSettings().avoidance.value=true;
+        BaritoneAPI.getSettings().blocksToAvoid.value=BaritoneAPI.getSettings().blocksToAvoid.defaultValue;
         BuiltInRegistries.BLOCK.getTag(BlockTags.FENCE_GATES).ifPresent(tag -> {
             for(Holder<Block> block:tag) {
                 BaritoneAPI.getSettings().blocksToAvoid.value.add(block.value());
