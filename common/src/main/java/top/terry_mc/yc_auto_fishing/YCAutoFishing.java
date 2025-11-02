@@ -58,7 +58,7 @@ public final class YCAutoFishing {
                 else {
                     stuckTickCount = 0;
                 }
-                if (stuckTickCount > 300 && (TextDisplayNavigator.followProcess==null || TextDisplayNavigator.followProcess.following().isEmpty())) {
+                if (stuckTickCount > 400 && (TextDisplayNavigator.followProcess==null || TextDisplayNavigator.followProcess.following().isEmpty())) {
                     Minecraft minecraft = Minecraft.getInstance();
                     minecraft.player.getInventory().selected = 5;
                     minecraft.getConnection().send(new ServerboundSetCarriedItemPacket(5));
@@ -69,7 +69,7 @@ public final class YCAutoFishing {
                         }
                     }
                 }
-                if(stuckTickCount>300) stuckTickCount = 0;
+                if(stuckTickCount>400) stuckTickCount = 0;
             }
         }
     }
