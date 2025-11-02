@@ -1,6 +1,7 @@
 package top.terry_mc.yc_auto_fishing;
 
 import baritone.api.BaritoneAPI;
+import baritone.api.utils.input.Input;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.core.Holder;
@@ -54,9 +55,11 @@ public final class YCAutoFishing {
             if(autoFishingEnabled) {
                 if(TextDisplayNavigator.followProcess==null || TextDisplayNavigator.followProcess.following().isEmpty()) {
                     stuckTickCount++;
+                    BaritoneAPI.getProvider().getPrimaryBaritone().getInputOverrideHandler().setInputForceState(Input.JUMP, true);
                 }
                 else {
                     stuckTickCount = 0;
+                    BaritoneAPI.getProvider().getPrimaryBaritone().getInputOverrideHandler().setInputForceState(Input.JUMP, false);
                 }
                 if (stuckTickCount > 400 && (TextDisplayNavigator.followProcess==null || TextDisplayNavigator.followProcess.following().isEmpty())) {
                     Minecraft minecraft = Minecraft.getInstance();
@@ -69,7 +72,11 @@ public final class YCAutoFishing {
                         }
                     }
                 }
-                if(stuckTickCount>400) stuckTickCount = 0;
+                if(stuckTickCount > 400) stuckTickCount = 0;
+            }
+            else {
+                BaritoneAPI.getProvider().getPrimaryBaritone().getInputOverrideHandler().setInputForceState(Input.JUMP, false);
+                stuckTickCount = 0;
             }
         }
     }
